@@ -946,7 +946,7 @@ abstract class AbstractConnection extends AbstractChannel
         // For BC, this library opts for disabled heartbeat if client value is 0.
         $v = $args->read_short();
         if ($this->heartbeat > 0 && $v > 0) {
-            $this->heartbeat = min($this->heartbeat, $v);
+            $this->heartbeat = max($this->heartbeat, $v);
         }
 
         $this->x_tune_ok($this->channel_max, $this->frame_max, $this->heartbeat);
